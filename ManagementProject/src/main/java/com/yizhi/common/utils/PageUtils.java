@@ -94,5 +94,4 @@ public class PageUtils implements Serializable {
 	public void setCode(int code) {
 		this.code = code;
 	}
-
 }

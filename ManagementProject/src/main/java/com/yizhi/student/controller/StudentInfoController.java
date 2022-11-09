@@ -33,14 +33,9 @@ import com.yizhi.student.service.StudentInfoService;
 @RequestMapping("/student/studentInfo")
 public class StudentInfoController {
 
-	
-
-
 	@Autowired
 	private StudentInfoService studentInfoService;
-
-
-
+	
 	/**
 	 * 可分页 查询
 	 */
@@ -48,8 +43,11 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-
-		return null;
+		System.err.println(params);
+		List<StudentInfoDO> stuList = studentInfoService.list(params);
+		int count = studentInfoService.count(params);
+		return new PageUtils(stuList,count,
+				Integer.valueOf((String) params.get("currPage")),Integer.valueOf((String) params.get("pageSize")));
 
 	}
 
@@ -62,8 +60,8 @@ public class StudentInfoController {
 	@PostMapping("/update")
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
-
-		return null;
+		int count = studentInfoService.update(studentInfo);
+		return count == 1 ? R.ok("修改成功") : R.error("修改失败");
 	}
 
 	/**
@@ -74,7 +72,8 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
 	public R remove( Integer id){
-		return null;
+		int count = studentInfoService.remove(id);
+		return R.ok("删除成功" + count + "条");
 	}
 	
 	/**
@@ -85,8 +84,8 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-
-		return null;
+		int count = studentInfoService.batchRemove(ids);
+		return R.ok("删除成功" + count + "条");
 	}
 
 
@@ -118,6 +117,15 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:add")
 	String add(){
 	    return "student/studentInfo/add";
+	}
+
+	@Log("学生信息保存")
+	@ResponseBody
+	@PostMapping("/save")
+	@RequiresPermissions("student:studentInfo:add")
+	public R save(StudentInfoDO studentInfoDO){
+		int save = studentInfoService.save(studentInfoDO);
+		return save == 1 ? R.ok("添加成功") : R.error("添加失败");
 	}
 	
 }//end class

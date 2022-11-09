@@ -94,7 +94,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_321.jdk/Contents/Home/jre/../lib/jconsole.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../study/java/developer_tools/jdk-8u202-windows-x64/jre/../lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -103,7 +103,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_321.jdk/Contents/Home/jre/../lib/tools.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../study/java/developer_tools/jdk-8u202-windows-x64/jre/../lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

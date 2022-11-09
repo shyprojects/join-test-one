@@ -2,8 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yizhi.student.dao.StudentInfoDao">
-	
-	
+    
+    <!--int remove(Integer id);-->
+	<delete id="remove">
+        delete from s_student_info where id = #{id}
+    </delete>
+
+    <!--int batchRemove(Integer[] ids);-->
+    <delete id="batchRemove">
+        delete from s_student_info where id in (
+            <foreach collection="array" item="id" separator=",">
+                #{id}
+            </foreach>
+            )
+    </delete>
+
+    <!--int save(StudentInfoDO studentInfo);-->
+    <insert id="save">
+        insert into
+            s_student_info(id,student_id,exam_id,class_id,student_name,certify,mail_address,foreign_lanaguage,student_sex,nation,political,card_id,telephone,subject_type,tocollege,tocampus,tomajor,birthplace,note,add_time,edit_time,edit_userid,birthday,grade,isstate)
+        values (#{id},#{studentId},#{examId},#{classId},#{studentName},#{certify},#{mailAddress},#{foreignLanaguage},#{studentSex},#{nation},#{political},#{cardId},#{telephone},#{subjectType},#{tocollege},#{tocampus},#{tomajor},#{birthplace},#{note},#{addTime},#{editTime},#{editUserid},#{birthday},#{grade},#{isstate})
+    </insert>
+
+    <!--int update(StudentInfoDO studentInfo);-->
+    <update id="update">
+        update s_student_info
+        set student_id = #{studentId} , exam_id = #{examId} , class_id = #{classId}
+          , student_name = #{studentName} , certify = #{certify} , mail_address = #{mailAddress}
+          , foreign_lanaguage = #{foreignLanaguage} , student_sex = #{studentSex}
+          , nation = #{nation} , political = #{political} , card_id = #{cardId}
+          , telephone = #{telephone} , subject_type = #{subjectType} , tocollege = #{tocollege}
+          , tomajor = #{tomajor} , birthplace = #{birthplace} , grade = #{grade}
+          , isstate = #{isstate} , birthday = #{birthday} , note = #{note}
+        where id = #{id}
+    </update>
+
+    <!--StudentInfoDO get(Integer id);-->
+    <select id="get" resultType="com.yizhi.student.domain.StudentInfoDO">
+        select * from s_student_info where id = #{id}
+    </select>
 
 
+    <!--List<StudentInfoDO> list(Map<String,Object> map);-->
+    <select id="list" resultType="com.yizhi.student.domain.StudentInfoDO">
+        select * from s_student_info where 1 = 1
+<!--        <if test="name!=null and name!=''">and `student_name` like '%#{name}%'</if>-->
+        <if test="tocollegeId!=null and tocollegeId!=''">and `tocollege` = #{tocollegeId}</if>
+        <if test="tomajorId!=null and tomajorId!=''">and `tomajor` = #{tomajorId}</if>
+        <if test="classId!=null and classId!=''">and `class_id` = #{classId}</if>
+        <if test="name!=null and name!=''">and `student_name` like concat('%',#{name},'%')</if>
+        limit #{p1} , #{p2}
+    </select>
+
+    <!--int count(Map<String,Object> map);-->
+    <select id="count" resultType="int">
+        select count(*) from s_student_info where 1 = 1
+<!--        <if test="name!=null and name!=''">and `student_name` = #{name} </if>&lt;!&ndash;like concat('%',#{name},'%')&ndash;&gt;-->
+        <if test="tocollegeId!=null and tocollegeId!=''">and `tocollege` = #{tocollegeId}</if>
+        <if test="tomajorId!=null and tomajorId!=''">and `tomajor` = #{tomajorId}</if>
+        <if test="classId!=null and classId!=''">and `class_id` = #{classId}</if>
+        <if test="name!=null and name!=''">and `student_name` like concat('%',#{name},'%')</if>
+    </select>
 </mapper>

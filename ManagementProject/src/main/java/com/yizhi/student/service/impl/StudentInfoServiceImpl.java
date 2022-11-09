@@ -1,5 +1,6 @@
 package com.yizhi.student.service.impl;
 
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,11 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
 	@Override
 	public List<StudentInfoDO> list(Map<String, Object> map){
+		Integer currPage = Integer.valueOf((String) map.get("currPage"));
+		Integer pageSize = Integer.valueOf((String)map.get("pageSize"));
+
+		map.put("p1",(currPage - 1) * pageSize);
+		map.put("p2",pageSize);
 		return studentInfoDao.list(map);
 	}
 
