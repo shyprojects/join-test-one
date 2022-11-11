@@ -4,6 +4,8 @@ import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,11 +50,35 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int save(StudentInfoDO studentInfo){
+		ArrayList<String> list = new ArrayList<>();
+		list.add(studentInfo.getStudentId());
+		list.add(studentInfo.getExamId());
+		list.add(studentInfo.getCertify());
+		list.add(studentInfo.getCardId());
+		list.add(studentInfo.getTelephone());
+		Iterator<String> iterator = list.iterator();
+		while (iterator.hasNext()){
+			if(!iterator.next().matches("[0-9]+")){
+				return 0;
+			}
+		}
 		return studentInfoDao.save(studentInfo);
 	}
 	
 	@Override
 	public int update(StudentInfoDO studentInfo){
+		ArrayList<String> list = new ArrayList<>();
+		list.add(studentInfo.getStudentId());
+		list.add(studentInfo.getExamId());
+		list.add(studentInfo.getCertify());
+		list.add(studentInfo.getCardId());
+		list.add(studentInfo.getTelephone());
+		Iterator<String> iterator = list.iterator();
+		while (iterator.hasNext()){
+			if(!iterator.next().matches("[0-9]+")){
+				return 0;
+			}
+		}
 		return studentInfoDao.update(studentInfo);
 	}
 	

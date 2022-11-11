@@ -43,7 +43,6 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-		System.err.println(params);
 		List<StudentInfoDO> stuList = studentInfoService.list(params);
 		int count = studentInfoService.count(params);
 		return new PageUtils(stuList,count,
