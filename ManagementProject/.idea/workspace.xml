@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d0d5cea6-eba5-4063-aaf1-2f815996b3d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/student/controller/StudentInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/student/controller/StudentInfoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/student/service/impl/StudentInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/student/service/impl/StudentInfoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
     </list>
@@ -133,7 +131,10 @@
       <workItem from="1668059260524" duration="2000" />
       <workItem from="1668144847047" duration="242000" />
       <workItem from="1668145341772" duration="561000" />
-      <workItem from="1668167937424" duration="2393000" />
+      <workItem from="1668167937424" duration="2560000" />
+      <workItem from="1668171650994" duration="5000" />
+      <workItem from="1668175324513" duration="830000" />
+      <workItem from="1668219201877" duration="563000" />
     </task>
     <servers />
   </component>

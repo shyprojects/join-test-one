@@ -50,6 +50,10 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int save(StudentInfoDO studentInfo){
+		String studentSex = studentInfo.getStudentSex();
+		if(!studentSex.equals("0") || !studentSex.equals("1")){
+			return 0;
+		}
 		ArrayList<String> list = new ArrayList<>();
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
@@ -58,7 +62,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 		list.add(studentInfo.getTelephone());
 		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()){
-			if(!iterator.next().matches("[0-9]+")){
+			String s = iterator.next();
+			if(s == null || !s.matches("[0-9]+")){
 				return 0;
 			}
 		}
@@ -67,6 +72,10 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int update(StudentInfoDO studentInfo){
+		String studentSex = studentInfo.getStudentSex();
+		if(!studentSex.equals("0") || !studentSex.equals("1")){
+			return 0;
+		}
 		ArrayList<String> list = new ArrayList<>();
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
@@ -75,7 +84,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 		list.add(studentInfo.getTelephone());
 		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()){
-			if(!iterator.next().matches("[0-9]+")){
+			String s = iterator.next();
+			if(s == null || !s.matches("[0-9]+")){
 				return 0;
 			}
 		}
