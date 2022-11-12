@@ -70,9 +70,9 @@ public class StudentInfoController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
-	public R remove( Integer id){
+	public R remove(Integer id){
 		int count = studentInfoService.remove(id);
-		return R.ok("删除成功" + count + "条");
+		return count >= 1 ? R.ok("删除成功" + count + "条") : R.error("id不存在,删除失败");
 	}
 	
 	/**
