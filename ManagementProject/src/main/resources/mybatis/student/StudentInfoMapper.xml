@@ -20,8 +20,8 @@
     <!--int save(StudentInfoDO studentInfo);-->
     <insert id="save">
         insert into
-            s_student_info(id,student_id,exam_id,class_id,student_name,certify,mail_address,foreign_lanaguage,student_sex,nation,political,card_id,telephone,subject_type,tocollege,tocampus,tomajor,birthplace,note,add_time,edit_time,edit_userid,birthday,grade,isstate)
-        values (#{id},#{studentId},#{examId},#{classId},#{studentName},#{certify},#{mailAddress},#{foreignLanaguage},#{studentSex},#{nation},#{political},#{cardId},#{telephone},#{subjectType},#{tocollege},#{tocampus},#{tomajor},#{birthplace},#{note},#{addTime},#{editTime},#{editUserid},#{birthday},#{grade},#{isstate})
+            s_student_info(student_id,exam_id,class_id,student_name,certify,mail_address,foreign_lanaguage,student_sex,nation,political,card_id,telephone,subject_type,tocollege,tocampus,tomajor,birthplace,note,add_time,edit_time,edit_userid,birthday,grade,isstate)
+        values (#{studentId},#{examId},#{classId},#{studentName},#{certify},#{mailAddress},#{foreignLanaguage},#{studentSex},#{nation},#{political},#{cardId},#{telephone},#{subjectType},#{tocollege},#{tocampus},#{tomajor},#{birthplace},#{note},#{addTime},#{editTime},#{editUserid},#{birthday},#{grade},#{isstate})
     </insert>
 
     <!--int update(StudentInfoDO studentInfo);-->
@@ -51,7 +51,7 @@
         <if test="tomajorId!=null and tomajorId!=''">and `tomajor` = #{tomajorId}</if>
         <if test="classId!=null and classId!=''">and `class_id` = #{classId}</if>
         <if test="name!=null and name!=''">and `student_name` like concat('%',#{name},'%')</if>
-        limit #{p1} , #{p2}
+        <if test="currPage!=null and currPage!='' and pageSize!=null and pageSize!=''">limit #{p1} , #{p2}</if>
     </select>
 
     <!--int count(Map<String,Object> map);-->

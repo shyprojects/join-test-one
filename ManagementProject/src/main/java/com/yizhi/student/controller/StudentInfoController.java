@@ -1,11 +1,9 @@
 package com.yizhi.student.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yizhi.common.annotation.Log;
 import com.yizhi.common.controller.BaseController;
@@ -43,6 +41,13 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
+		System.err.println(params.size());
+		if (params.size() == 0){
+			List<StudentInfoDO> stuList = studentInfoService.list(params);
+			int count = studentInfoService.count(params);
+			System.err.println(count);
+			return new PageUtils(stuList,count);
+		}
 		List<StudentInfoDO> stuList = studentInfoService.list(params);
 		int count = studentInfoService.count(params);
 		return new PageUtils(stuList,count,
@@ -60,7 +65,7 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
 		int count = studentInfoService.update(studentInfo);
-		return count == 1 ? R.ok("修改成功") : R.error("修改失败");
+		return count == 1 ? R.ok(JSON.toJSONString(studentInfo)) : R.error("修改失败");
 	}
 
 	/**
@@ -83,8 +88,9 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
+		System.err.println("---------" + Arrays.toString(ids));
 		int count = studentInfoService.batchRemove(ids);
-		return R.ok("删除成功" + count + "条");
+		return count == 1 ? R.ok("删除成功" ) : R.error("删除失败");
 	}
 
 
@@ -124,6 +130,7 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:add")
 	public R save(StudentInfoDO studentInfoDO){
 		int save = studentInfoService.save(studentInfoDO);
+		System.err.println(save);
 		return save == 1 ? R.ok("添加成功") : R.error("添加失败");
 	}
 	

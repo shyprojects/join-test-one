@@ -32,11 +32,12 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
 	@Override
 	public List<StudentInfoDO> list(Map<String, Object> map){
-		Integer currPage = Integer.valueOf((String) map.get("currPage"));
-		Integer pageSize = Integer.valueOf((String)map.get("pageSize"));
-
-		map.put("p1",(currPage - 1) * pageSize);
-		map.put("p2",pageSize);
+		if(map.get("currPage") != null && (String)map.get("pageSize") != null){
+			Integer currPage = Integer.valueOf((String) map.get("currPage"));
+			Integer pageSize = Integer.valueOf((String)map.get("pageSize"));
+			map.put("p1",(currPage - 1) * pageSize);
+			map.put("p2",pageSize);
+		}
 		return studentInfoDao.list(map);
 	}
 
@@ -50,8 +51,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int save(StudentInfoDO studentInfo){
+		System.err.println(studentInfo);
 		String studentSex = studentInfo.getStudentSex();
-		if(!studentSex.equals("0") || !studentSex.equals("1")){
+		if(!studentSex.equals("2") && !studentSex.equals("1")){
 			return 0;
 		}
 		ArrayList<String> list = new ArrayList<>();
@@ -60,6 +62,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 		list.add(studentInfo.getCertify());
 		list.add(studentInfo.getCardId());
 		list.add(studentInfo.getTelephone());
+		list.add(studentInfo.getCardId());
 		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()){
 			String s = iterator.next();
@@ -73,10 +76,11 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	@Override
 	public int update(StudentInfoDO studentInfo){
 		String studentSex = studentInfo.getStudentSex();
-		if(!studentSex.equals("0") || !studentSex.equals("1")){
+		if(!studentSex.equals("2") && !studentSex.equals("1")){
 			return 0;
 		}
 		ArrayList<String> list = new ArrayList<>();
+		String cardId = studentInfo.getCardId();
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
 		list.add(studentInfo.getCertify());
@@ -94,12 +98,17 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int remove(Integer id){
+
 		return studentInfoDao.remove(id);
 	}
 	
 	@Override
 	public int batchRemove(Integer[] ids){
-		return studentInfoDao.batchRemove(ids);
+		if (ids == null || ids.length == 0 ){
+			return 1;
+		}
+		int i = studentInfoDao.batchRemove(ids);
+		return i >= 1 ? 1 : 0;
 	}
 	
 }

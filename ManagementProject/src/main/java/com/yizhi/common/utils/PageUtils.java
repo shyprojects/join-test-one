@@ -19,7 +19,7 @@ public class PageUtils implements Serializable {
 	//分页大小
 	private int pageSize=10;
 	//状态码
-	private int code=0;
+	private int code=200;
 
 	/**
 	 * 分页
