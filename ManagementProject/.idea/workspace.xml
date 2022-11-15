@@ -9,9 +9,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/common/utils/PageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/common/utils/PageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/common/utils/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/common/utils/R.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/student/controller/StudentInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/student/controller/StudentInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/student/domain/StudentInfoDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/student/domain/StudentInfoDO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yizhi/student/service/impl/StudentInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yizhi/student/service/impl/StudentInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/student/StudentInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/student/StudentInfoMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +143,8 @@
       <workItem from="1668244721259" duration="2000" />
       <workItem from="1668404445293" duration="7480000" />
       <workItem from="1668424577806" duration="2195000" />
+      <workItem from="1668427711179" duration="13000" />
+      <workItem from="1668490467566" duration="3016000" />
     </task>
     <servers />
   </component>

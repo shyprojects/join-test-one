@@ -25,7 +25,7 @@ public class StudentInfoDO implements Serializable {
 	//考生号
 	private String examId;
 	//所属班级
-	private Integer classId;
+	private String classId;
 	//学生姓名
 	private String studentName;
 	//身份证号
@@ -111,13 +111,13 @@ public class StudentInfoDO implements Serializable {
 	/**
 	 * 设置：所属班级
 	 */
-	public void setClassId(Integer classId) {
+	public void setClassId(String classId) {
 		this.classId = classId;
 	}
 	/**
 	 * 获取：所属班级
 	 */
-	public Integer getClassId() {
+	public String getClassId() {
 		return classId;
 	}
 	/**

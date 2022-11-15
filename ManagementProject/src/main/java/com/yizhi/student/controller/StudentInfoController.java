@@ -8,12 +8,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yizhi.common.annotation.Log;
 import com.yizhi.common.controller.BaseController;
 import com.yizhi.common.utils.*;
-import com.yizhi.student.domain.ClassDO;
-import com.yizhi.student.service.ClassService;
-import com.yizhi.student.service.CollegeService;
-import com.yizhi.student.service.MajorService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -88,8 +82,13 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-		System.err.println("---------" + Arrays.toString(ids));
-		int count = studentInfoService.batchRemove(ids);
+		int count;
+		try {
+			System.err.println("---------" + Arrays.toString(ids));
+			count = studentInfoService.batchRemove(ids);
+		} catch (RuntimeException e){
+			return R.error("删除失败");
+		}
 		return count == 1 ? R.ok("删除成功" ) : R.error("删除失败");
 	}
 
@@ -130,7 +129,6 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:add")
 	public R save(StudentInfoDO studentInfoDO){
 		int save = studentInfoService.save(studentInfoDO);
-		System.err.println(save);
 		return save == 1 ? R.ok("添加成功") : R.error("添加失败");
 	}
 	

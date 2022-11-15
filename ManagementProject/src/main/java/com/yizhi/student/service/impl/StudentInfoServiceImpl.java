@@ -12,7 +12,7 @@ import java.util.Map;
 import com.yizhi.student.dao.StudentInfoDao;
 import com.yizhi.student.domain.StudentInfoDO;
 import com.yizhi.student.service.StudentInfoService;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -53,16 +53,20 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	public int save(StudentInfoDO studentInfo){
 		System.err.println(studentInfo);
 		String studentSex = studentInfo.getStudentSex();
-		if(!studentSex.equals("2") && !studentSex.equals("1")){
+		if(!studentSex.equals("0") && !studentSex.equals("1")){
 			return 0;
 		}
 		ArrayList<String> list = new ArrayList<>();
+		list.add(studentInfo.getClassId());
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
 		list.add(studentInfo.getCertify());
 		list.add(studentInfo.getCardId());
 		list.add(studentInfo.getTelephone());
 		list.add(studentInfo.getCardId());
+		if (studentInfo.getBirthday() == null){
+			return 0;
+		}
 		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()){
 			String s = iterator.next();
@@ -103,11 +107,15 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	}
 	
 	@Override
+	@Transactional
 	public int batchRemove(Integer[] ids){
 		if (ids == null || ids.length == 0 ){
 			return 1;
 		}
 		int i = studentInfoDao.batchRemove(ids);
+		if (i != ids.length){
+			throw new RuntimeException("删除失败");
+		}
 		return i >= 1 ? 1 : 0;
 	}
 	
