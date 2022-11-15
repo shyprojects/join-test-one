@@ -52,12 +52,22 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	@Override
 	public int save(StudentInfoDO studentInfo){
 		System.err.println(studentInfo);
+		ArrayList<String> list = new ArrayList<>();
+		list.add(studentInfo.getClassId());
+		list.add(studentInfo.getTomajor().toString());
+		list.add(studentInfo.getTocollege().toString());
+		Iterator<String> iterator = list.iterator();
+		while (iterator.hasNext()){
+			String next = iterator.next();
+			if (!next.equals("1") && !next.equals("2")){
+				return 0;
+			}
+		}
 		String studentSex = studentInfo.getStudentSex();
 		if(!studentSex.equals("0") && !studentSex.equals("1")){
 			return 0;
 		}
-		ArrayList<String> list = new ArrayList<>();
-		list.add(studentInfo.getClassId());
+		list = new ArrayList<>();
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
 		list.add(studentInfo.getCertify());
@@ -67,7 +77,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 		if (studentInfo.getBirthday() == null){
 			return 0;
 		}
-		Iterator<String> iterator = list.iterator();
+		iterator = list.iterator();
 		while (iterator.hasNext()){
 			String s = iterator.next();
 			if(s == null || !s.matches("[0-9]+")){
@@ -79,18 +89,29 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int update(StudentInfoDO studentInfo){
+		ArrayList<String> list = new ArrayList<>();
+		list.add(studentInfo.getClassId());
+		list.add(studentInfo.getTomajor().toString());
+		list.add(studentInfo.getTocollege().toString());
+		Iterator<String> iterator = list.iterator();
+		while (iterator.hasNext()){
+			String next = iterator.next();
+			if (!next.equals("1") && !next.equals("2")){
+				return 0;
+			}
+		}
 		String studentSex = studentInfo.getStudentSex();
 		if(!studentSex.equals("2") && !studentSex.equals("1")){
 			return 0;
 		}
-		ArrayList<String> list = new ArrayList<>();
+		list = new ArrayList<>();
 		String cardId = studentInfo.getCardId();
 		list.add(studentInfo.getStudentId());
 		list.add(studentInfo.getExamId());
 		list.add(studentInfo.getCertify());
 		list.add(studentInfo.getCardId());
 		list.add(studentInfo.getTelephone());
-		Iterator<String> iterator = list.iterator();
+		iterator = list.iterator();
 		while (iterator.hasNext()){
 			String s = iterator.next();
 			if(s == null || !s.matches("[0-9]+")){
@@ -102,7 +123,6 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	
 	@Override
 	public int remove(Integer id){
-
 		return studentInfoDao.remove(id);
 	}
 	

@@ -59,7 +59,9 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
 		int count = studentInfoService.update(studentInfo);
-		return count == 1 ? R.ok(JSON.toJSONString(studentInfo)) : R.error("修改失败");
+		R r = count == 1 ? R.ok("修改信息") : R.error("修改失败");
+		r.put("studentInfo",studentInfo);
+		return r;
 	}
 
 	/**
@@ -69,8 +71,14 @@ public class StudentInfoController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
-	public R remove(Integer id){
-		int count = studentInfoService.remove(id);
+	public R remove(String id){
+		Integer integer;
+		try {
+			 integer = Integer.valueOf(id);
+		}catch (NumberFormatException e){
+			return R.error("id不存在,删除失败");
+		}
+		int count = studentInfoService.remove(integer);
 		return count >= 1 ? R.ok("删除成功" + count + "条") : R.error("id不存在,删除失败");
 	}
 	
