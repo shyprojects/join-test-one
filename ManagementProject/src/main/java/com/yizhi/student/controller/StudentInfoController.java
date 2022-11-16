@@ -59,8 +59,7 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
 		int count = studentInfoService.update(studentInfo);
-		R r = count == 1 ? R.ok("修改信息") : R.error("修改失败");
-		r.put("studentInfo",studentInfo);
+		R r = count == 1 ? R.ok("修改成功").put("studentInfo",studentInfo) : R.error("修改失败");
 		return r;
 	}
 

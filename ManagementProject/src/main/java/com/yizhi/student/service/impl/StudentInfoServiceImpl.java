@@ -64,7 +64,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 			}
 		}
 		String studentSex = studentInfo.getStudentSex();
-		if(!studentSex.equals("0") && !studentSex.equals("1")){
+		if(!studentSex.equals("2") && !studentSex.equals("1") && !studentSex.equals("0")){
 			return 0;
 		}
 		list = new ArrayList<>();
@@ -100,8 +100,11 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 				return 0;
 			}
 		}
+		if (studentInfo.getBirthday() == null){
+			return 0;
+		}
 		String studentSex = studentInfo.getStudentSex();
-		if(!studentSex.equals("2") && !studentSex.equals("1")){
+		if(!studentSex.equals("2") && !studentSex.equals("1") && !studentSex.equals("0")){
 			return 0;
 		}
 		list = new ArrayList<>();
